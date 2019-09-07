@@ -7,7 +7,7 @@ $(function () {
                 res.render("index", { articles: data })
             })
         } else {
-            console.log("Uh Oh. Looks like we don't have any new articles.")
+            console.log("Uh Oh. Looks like we don't have any new articles. Try Scraping Articles.")
         }
     })
 })

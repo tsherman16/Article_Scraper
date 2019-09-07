@@ -1,16 +1,16 @@
 <nav class="navbar navbar-expand-lg navbar-light bg-light">
-    <a class="navbar-brand" href="/views/index.handlebars">Article Scraper</a>
-    <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarNavAltMarkup"
-        aria-controls="navbarNavAltMarkup" aria-expanded="false" aria-label="Toggle navigation">
-        <span class="navbar-toggler-icon"></span>
-    </button>
-    <div class="collapse navbar-collapse" id="navbarNavAltMarkup">
-        <div class="navbar-nav">
-            <a class="nav-item nav-link active" href="/views/saved.handlebars">Saved Articles</a>
-            <a class="nav-item nav-link" href="#" id="scrapeArticles">Scrape New Articles</a>
-            <a class="nav-item nav-link" href="#">Clear Articles</a>
-        </div>
+  <a class="navbar-brand" href="/views/index.handlebars">Article Scraper</a>
+  <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarNavAltMarkup"
+    aria-controls="navbarNavAltMarkup" aria-expanded="false" aria-label="Toggle navigation">
+    <span class="navbar-toggler-icon"></span>
+  </button>
+  <div class="collapse navbar-collapse" id="navbarNavAltMarkup">
+    <div class="navbar-nav">
+      <a class="nav-item nav-link active" href="/views/saved.handlebars">Saved Articles</a>
+      <a class="nav-item nav-link" href="#" id="scrapeArticles">Scrape New Articles</a>
+      <a class="nav-item nav-link" href="#">Clear Articles</a>
     </div>
+  </div>
 </nav>
 
 <div class="jumbotron jumbotron-fluid">
@@ -22,6 +22,18 @@
 
 <div class="container">
   <div class="row" id="articleInput">
+    {{#each articles}}
+    <div class="card">
+      <h5 class="card-header" id="title">
+        <a href="{{link}}">{{title}}</a>
+      </h5>
 
+      <button data-articleid="{{_id}}" class="saveArticle">Save Article</button>
+
+      <div class="card-body">
+        <p class="card-text" id="summary">{{summary}}</p>
+      </div>
+    </div>
+    {{/each}}
   </div>
 </div>
