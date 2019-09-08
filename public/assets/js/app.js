@@ -1,13 +1,10 @@
-$(function () {
-    $("#scrapeArticles").on("click", function () {
-        event.preventDefault();
+$("#scrapeArticles").on("click", function (req, res) {
+    event.preventDefault();
 
+
+    $.getJSON("/all", function (err, data) {
         if (data) {
-            $.getJSON("/all", function(data) {
-                res.render("index", { articles: data })
-            })
-        } else {
-            console.log("Uh Oh. Looks like we don't have any new articles. Try Scraping Articles.")
+            res.render("index", { articles: data }) 
         }
     })
 })

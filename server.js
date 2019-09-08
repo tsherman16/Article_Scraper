@@ -29,6 +29,10 @@ app.get("/", function(req, res) {
     res.render("index");
   });
 
+  app.get("/saved", function(req, res) {
+    res.render("saved");
+  });
+
 axios.get("https://www.nytimes.com/").then(function (response) {
     var $ = cheerio.load(response.data);
     var results = [];
