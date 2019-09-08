@@ -25,13 +25,13 @@ db.on("error", function (error) {
 app.engine("handlebars", exphbs({ defaultLayout: "main" }));
 app.set("view engine", "handlebars");
 
-app.get("/", function(req, res) {
+app.get("/", function (req, res) {
     res.render("index");
-  });
+});
 
-  app.get("/saved", function(req, res) {
+app.get("/saved", function (req, res) {
     res.render("saved");
-  });
+});
 
 axios.get("https://www.nytimes.com/").then(function (response) {
     var $ = cheerio.load(response.data);
@@ -63,13 +63,13 @@ axios.get("https://www.nytimes.com/").then(function (response) {
 
 app.get("/all", function (req, res) {
     db.scrapedArticles.find({}, function (error, found) {
-      if (error) {
-        console.log(error);
-      } else {
-        res.json(found);
-      }
+        if (error) {
+            console.log(error);
+        } else {
+            res.json(found);
+        }
     })
-  })
+})
 
 
 
