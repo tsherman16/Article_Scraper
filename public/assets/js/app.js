@@ -1,7 +1,38 @@
-$("#scrapeArticles").on("click", function (req, res) {
-    event.preventDefault();
+$(document).on("click", "#commentButton", function() {
 
-    $.getJSON("/all", function (err, data) {
-            res.render("index", { articles: data })
+    var thisId = $(this).attr("data-id");
+
+    $.ajax({
+        method: "GET",
+        url: "/articles/" + thisId
     })
+    .then(function(data) {
+        // A textarea to add a comment
+        $("#comments").append("<textarea id='commentInput' name='comment'></textarea>")
+        // A button to submit a new comment, with the id of the article saved to it
+        $("#comments").append("<button data-id='" + data._id + "' id='saveComment' class='btn btn-success'>Save Comment</button>");
+
+        if (data.comment) {
+            // Place the body of the comment in the body textarea
+            $("#commentInput").val(data.comment.body);
+        }
+    });
+});
+
+$(document).on("click", "#saveComment", function() {
+    var thisId =$(this).attr("data-id");
+
+    $.ajax({
+        method: "POST",
+        url: "/articles/" + thisId,
+        data: {
+            body: $("#commentInput").val().append("<button class='btn btn-success' id='deleteButton'>Delete Comment</button>")
+        }
+    })
+    .then(function(data) {
+        console.log(data);
+        $("#comments").empty();
+    })
+
+    $("#commentInput").val("");
 })

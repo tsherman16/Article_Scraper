@@ -7,8 +7,8 @@
   <div class="collapse navbar-collapse" id="navbarNavAltMarkup">
     <div class="navbar-nav">
       <a class="nav-item nav-link active" id="savedArticles" href="/saved">Saved Articles</a>
-      <button class="nav-item nav-link" id="scrapeArticles">Scrape New Articles</button>
-      <button class="nav-item nav-link" id="clearArticles">Clear Articles</button>
+      <a class="btn btn-primary nav-item nav-link" href="/scrape" id="scrapeArticles">Scrape New Articles</a>
+      <a class="btn btn-danger nav-item nav-link" href="/clear" id="clearArticles">Clear Articles</a>
     </div>
   </div>
 </nav>
@@ -22,16 +22,23 @@
 
 <div class="container">
   <div class="row" id="articleInput">
+
     {{#each articles}}
-    <div class="card">
-      <h5 class="card-header" id="title">
-        <a href="{{link}}">{{title}}</a>
-      </h5>
+    <div class="col-12">
 
-      <button data-articleid="{{_id}}" class="saveArticle">Save Article</button>
+      <div class="card">
+        <h5 class="card-header" id="title">
+          <a href="{{link}}">{{title}}</a>
+        </h5>
 
-      <div class="card-body">
-        <p class="card-text" id="summary">{{summary}}</p>
+        <button data-id="{{_id}}" class="saveArticle">Save Article</button>
+
+        <div class="card-body">
+          <p class="card-text" id="summary">{{summary}}</p>
+          <button class="btn btn-primary" id="commentButton">Leave Comment</button>
+          <p class="card-text" id="commentText">{{comment}}</p>
+        </div>
+        <div id="comments"></div>
       </div>
     </div>
     {{/each}}
