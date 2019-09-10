@@ -12,6 +12,9 @@ var db = require("./models");
 // Initialize Express
 var app = express();
 
+// Parse request body as JSON
+app.use(express.urlencoded({ extended: true }));
+app.use(express.json());
 // Set up a static folder (public) for our web app
 app.use(express.static("public"));
 
