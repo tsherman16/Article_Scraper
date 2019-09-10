@@ -1,4 +1,4 @@
-$(document).on("click", "#commentButton", function() {
+$(document).on("click", ".commentButton", function() {
 
     var thisId = $(this).attr("data-id");
 
@@ -11,7 +11,7 @@ $(document).on("click", "#commentButton", function() {
         // A textarea to add a comment
         $("#comments").append("<textarea id='commentInput' name='comment'></textarea>")
         // A button to submit a new comment, with the id of the article saved to it
-        $("#comments").append("<button data-id='" + data._id + "' id='saveComment' class='btn btn-success'>Save Comment</button>");
+        $("#comments").append("<button data-id='" + data._id + "' class='btn btn-success saveComment'>Save Comment</button>");
 
         if (data.comment) {
             // Place the body of the comment in the body textarea
@@ -20,7 +20,7 @@ $(document).on("click", "#commentButton", function() {
     });
 });
 
-$(document).on("click", "#saveComment", function() {
+$(document).on("click", ".saveComment", function() {
     var thisId =$(this).attr("data-id");
 
     $.ajax({

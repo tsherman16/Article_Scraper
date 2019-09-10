@@ -45,6 +45,7 @@ app.get("/clear", function (req, res) {
 })
 
 app.get("/articles/:id", function (req, res) {
+
     db.Article.findOne({ _id: req.params.id })
     .populate("comment")
     .then(function (dbArticle) {
@@ -56,10 +57,17 @@ app.get("/articles/:id", function (req, res) {
 })
 
 app.post("/articles/:id", function (req, res) {
-    db.Article.create(req.body)
-    console.log("test")
+    console.log(req.params.id +"line 60")
+    // db.Article.findOneAndUpdate({ _id: req.params.id }, { comment: req.body })
+    // .then(function (dbArticle) {
+    //     res.json(dbArticle);
+    // })
+    // .catch(function (err) {
+    //     res.json(err);
+    // });
+    db.Comment.create(req.body)
     .then(function (dbComment) {
-        return db.Article.findOneAndUpdate({ _id: req.params.id }, { comment: dbComment._id });
+        return db.Article.findOneAndUpdate({ _id: req.params.id }, { comment: req.body });
     })
     .then(function (dbArticle) {
         res.json(dbArticle);
