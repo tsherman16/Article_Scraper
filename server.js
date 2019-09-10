@@ -21,7 +21,7 @@ mongoose.connect("mongodb://localhost/unit18Populater", { useNewUrlParser: true 
 app.engine("handlebars", exphbs({ defaultLayout: "main" }));
 app.set("view engine", "handlebars");
 
-app.get("/", function (req, res) {
+app.get("/articles", function (req, res) {
     db.Article.find({}, function (err, data) {
         if (err) {
             console.log(err);
@@ -31,31 +31,21 @@ app.get("/", function (req, res) {
     })
 });
 
-app.get("/articles", function (req, res) {
-    db.Article.find({}, function (err, data) {
-        if (err) {
-            console.log(err);
-        } else {
-            res.json(data)
-        }
-    })
-})
-
 app.get("/saved", function (req, res) {
     res.render("saved");
 });
 
 app.get("/clear", function (req, res) {
     db.Article.remove({}, function () {
-        res.redirect("/");
+        res.redirect("/articles");
     });
 })
 
 app.get("/articles/:id", function (req, res) {
-    db.Article,findOne({ _id: req.params.id })
+    db.Article.findOne({ _id: req.params.id })
     .populate("comment")
     .then(function (dbArticle) {
-        res.render("index", { articles: dbArticle })
+        res.json(dbArticle)
     })
     .catch(function (err) {
         res.json(err);
@@ -95,7 +85,7 @@ app.get("/scrape", function (req, res) {
                 });
         });
 
-        res.redirect("/");
+        res.redirect("/articles");
     });
 })
 

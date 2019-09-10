@@ -26,7 +26,7 @@ $(document).on("click", "#saveComment", function() {
         method: "POST",
         url: "/articles/" + thisId,
         data: {
-            body: $("#commentInput").val().append("<button class='btn btn-success' id='deleteButton'>Delete Comment</button>")
+            body: $("#commentInput").val()
         }
     })
     .then(function(data) {
