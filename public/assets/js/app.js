@@ -7,6 +7,7 @@ $(document).on("click", "#commentButton", function() {
         url: "/articles/" + thisId
     })
     .then(function(data) {
+        console.log(data);
         // A textarea to add a comment
         $("#comments").append("<textarea id='commentInput' name='comment'></textarea>")
         // A button to submit a new comment, with the id of the article saved to it

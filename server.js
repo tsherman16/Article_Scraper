@@ -57,6 +57,7 @@ app.get("/articles/:id", function (req, res) {
 
 app.post("/articles/:id", function (req, res) {
     db.Article.create(req.body)
+    console.log("test")
     .then(function (dbComment) {
         return db.Article.findOneAndUpdate({ _id: req.params.id }, { comment: dbComment._id });
     })
